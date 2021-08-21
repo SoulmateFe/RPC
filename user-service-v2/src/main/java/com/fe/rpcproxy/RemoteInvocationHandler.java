@@ -1,4 +1,8 @@
-package com.fe;
+package com.fe.rpcproxy;
+
+import com.fe.RpcRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -8,13 +12,14 @@ import java.lang.reflect.Method;
  * @Author sosuke
  * @Date 2021/8/19 22:08
  */
+@Component
 public class RemoteInvocationHandler implements InvocationHandler {
+    @Value("${order.service.host}")
     private String host;
+    @Value("${order.service.port}")
     private int port;
 
-    public RemoteInvocationHandler(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public RemoteInvocationHandler() {
     }
 
     @Override
