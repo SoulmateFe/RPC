@@ -2,6 +2,7 @@ package com.fe.rpcproxy;
 
 import com.fe.RpcRequest;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -36,6 +37,14 @@ public class ProcessHandler implements Runnable {
             oos.flush();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (null != socket) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
